@@ -83,13 +83,11 @@ You should see the site with no messages currently displayed.
 
 ## Subscribe to your storage account
 
-You subscribe to a topic to tell Event Grid which events you want to track and where to send those events. The following example subscribes to the storage account you created, and passes the URL from your web app as the endpoint for event notification. Replace `<event_subscription_name>` with a name for your event subscription. For `<resource_group_name>` and `<storage_account_name>`, use the values you created earlier.
-
-The endpoint for your web app must include the suffix `/api/updates/`.
+You subscribe to a topic to tell Event Grid which events you want to track and where to send those events. The following example subscribes to the storage account you created, and passes the URL from your web app as the endpoint for event notification. Replace `<event_subscription_name>` with a name for your event subscription and `<notification_uri>` with your site's notification URI. For `<resource_group_name>` and `<storage_account_name>`, use the values you created earlier.
 
 ```azurecli-interactive
 storageid=$(az storage account show --name <storage_account_name> --resource-group <resource_group_name> --query id --output tsv)
-endpoint=https://$sitename.azurewebsites.net/api/updates
+endpoint=https://$sitename.azurewebsites.net/<notification_uri>
 
 az eventgrid event-subscription create \
   --resource-id $storageid \
